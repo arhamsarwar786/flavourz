@@ -1,11 +1,15 @@
+import 'package:flavourz/controllers/api_manager.dart';
+import 'package:flavourz/controllers/globalState.dart';
+import 'package:flavourz/models/menu_model.dart';
 import 'package:flutter/material.dart';
-import '../widgets.dart';
+
+import '../../Utils/constant.dart';
+import '../../widgets.dart';
 import '/Screens/details_item.dart';
 
-import '../Utils/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import 'Widgets/Drawer.dart';
+import 'Drawer.dart';
 
 class Home1 extends StatefulWidget {
   @override

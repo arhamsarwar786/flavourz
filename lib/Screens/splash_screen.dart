@@ -1,6 +1,11 @@
 import 'dart:async';
 
+import 'package:flavourz/controllers/providers/menu_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../controllers/api_manager.dart';
+import '../controllers/globalState.dart';
+import '../widgets.dart';
 import '/Screens/starting_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,9 +19,14 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController controller;
   late Animation colorAnimation;
 
+  
+
+  
   @override
   void initState() {
     super.initState();
+    // fetchMenuList();
+    Provider.of<MenuProvider>(context,listen: false).fetchMenu(); 
     Timer(Duration(seconds: 5), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => StartScreen()));

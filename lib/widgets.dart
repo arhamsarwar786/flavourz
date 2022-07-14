@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 import 'Utils/constant.dart';
+import 'controllers/api_manager.dart';
+import 'controllers/globalState.dart';
+
+
+
+  fetchMenuList()async{
+    GlobalState.menuList = await APIManager.fetchMenu();
+  }
+
 
 Widget CustomAppBar(context, title, int color) {
   final size = MediaQuery.of(context).size;
