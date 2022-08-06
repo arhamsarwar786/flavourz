@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<MenuProvider>.value(value: MenuProvider()),
       ],
-      child: MaterialApp(        
+      child: MaterialApp(
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch().copyWith(
             primary: primary
