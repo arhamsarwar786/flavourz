@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "589573813985",
+    "project_id": "flavourz-food",
+    "storage_bucket": "flavourz-food.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589573813985:android:c278ce8eb45e57422aa9a0",
+        "android_client_info": {
+          "package_name": "com.arham.flavourz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589573813985-06soob0bd5joists4c15g6ds3aj8pnba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arham.flavourz",
+            "certificate_hash": "a365e58b3d8f45350fc1f3216d1142d9cf177bdf"
+          }
+        },
+        {
+          "client_id": "589573813985-84i5tg1ro59tgradj9rlnrciolgg6t9e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIYKl9xfTYd8TSMHZc4rnitdbj-D9oyyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589573813985-84i5tg1ro59tgradj9rlnrciolgg6t9e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

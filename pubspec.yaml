@@ -39,6 +39,9 @@ dependencies:
   http:
   provider:
   shared_preferences: 
+  firebase_core: ^1.18.0
+  firebase_auth: ^3.3.20
+  intl:
 
 dev_dependencies:
   flutter_test:

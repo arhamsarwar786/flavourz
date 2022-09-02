@@ -4,19 +4,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class SavedPreferences {
-  deviceCart(items)async{
+  static setCart(items)async{
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString("deviceCart", jsonEncode(items));
   }
 
-  getDeviceCart()async{
+  static getCart()async{
     var data;
     SharedPreferences pref = await SharedPreferences.getInstance();
     var res = pref.getString("deviceCart");
     if(res != null){
-      data = res;
+      data = jsonDecode(res);
     }
     return data;
+  }
+
+
+  static clearPreference()async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.clear();
+    print("ALL CLEARED");
   }
 
 }
