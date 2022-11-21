@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavourz/View/set_prefrences.dart';
 import 'package:flutter/material.dart';
 
 import '../../Utils/constant.dart';
@@ -354,14 +355,10 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
-  verifyOTP(number) async {
-    
-    // if (GlobalState.userDetails == null) {
-      
-    // }
+  verifyOTP(number) async {      
     setState(() {
       isLoad = false;
     });
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SetPreference()));
   }
 }

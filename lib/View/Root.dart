@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../Utils/constant.dart';
 import 'Home/BottomNavigationBar.dart';
+import 'Home/deal_screen.dart';
 import 'Home/home.dart';
 import 'Menu/menu_screen.dart';
 import '/View/profile_screen.dart';
@@ -12,6 +13,7 @@ List screens = [
   Home1(),
   Menu(),
   AddToCart(),
+  DealScreen(),
   MyAccount(),
 ];
 int screenIndex = 0;
@@ -43,9 +45,12 @@ class _HomeState extends State<Home> {
 Widget BottomBar(context) {
   // var _onItemTapped;
   return BottomNavigationBar(
+    showUnselectedLabels: true,
+    showSelectedLabels: true,
     currentIndex: screenIndex,
     onTap: (index) {
       screenIndex = index;
+      print(index);
       Navigator.pushAndRemoveUntil(
       context,
       PageTransition(
@@ -54,12 +59,6 @@ Widget BottomBar(context) {
       ),
       (Route<dynamic> route) => false,
     );
-
-    setState(() {
-      
-    });
-    
-      // _onItemTapped(context);
     },
     iconSize: 30,
     selectedLabelStyle: TextStyle(
@@ -68,17 +67,27 @@ Widget BottomBar(context) {
     unselectedLabelStyle: TextStyle(
       color: Colors.black12,
     ),
+    unselectedItemColor: Colors.grey,
     selectedItemColor: secondary,
-    unselectedFontSize: 15.0,
+    // unselectedFontSize: 15.0,
     selectedIconTheme: IconThemeData(color: secondary),
     unselectedIconTheme: IconThemeData(color: Colors.black12),
-    items: const [
+    items:  [
+
       BottomNavigationBarItem(
+     
         icon: Icon(Icons.home),
+        // icon: Column(
+        //   mainAxisSize: MainAxisSize.min,
+        //   children: [
+        //     Icon(Icons.home),
+        //     Text("Home")
+        //   ],
+        // ),
         // ignore: deprecated_member_use
-        label: "home",
+        label: "Home"
       ),
-      BottomNavigationBarItem(
+      BottomNavigationBarItem(        
           icon: Icon(
             Icons.menu,
           ),
@@ -88,7 +97,14 @@ Widget BottomBar(context) {
         // ignore: deprecated_member_use
         label: "Cart",
       ),
+     
       BottomNavigationBarItem(
+        icon: Icon(Icons.offline_bolt),
+        // ignore: deprecated_member_use
+        label: "Deals",
+      ),
+
+       BottomNavigationBarItem(
         icon: Icon(Icons.person),
         // ignore: deprecated_member_use
         label: "Account",

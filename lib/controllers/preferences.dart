@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SavedPreferences {
   static setCart(items)async{
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString("deviceCart", jsonEncode(items));
+    pref.setString("deviceCart", jsonEncode(items));    
   }
 
   static getCart()async{

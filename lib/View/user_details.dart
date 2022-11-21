@@ -21,6 +21,15 @@ class UserDetailsState extends State<UserDetails> {
     final emailController = TextEditingController();
     final addressController = TextEditingController();
     final commentController = TextEditingController();
+
+
+    @override
+  void initState() {  
+    super.initState();
+
+    addressController.text = GlobalState.location!;
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -69,20 +78,20 @@ class UserDetailsState extends State<UserDetails> {
                 height: 5,
               ),
                 Text(
-                "Email",
+                "Phone Number (Optional)",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: size.height * 0.021,
                     fontWeight: FontWeight.w700),
               ),
                 CustomTextField(
-                title: "Enter Email",
+                title: "Enter Phone Number ",
                 controller: emailController,
-                type: TextInputType.emailAddress,
+                type: TextInputType.number,
               ),
-              SizedBox(
-                height: 5,
-              ),
+              // SizedBox(
+              //   height: 5,
+              // ),
               Text(
                 "Address",
                 style: TextStyle(
@@ -101,7 +110,7 @@ class UserDetailsState extends State<UserDetails> {
                 height: 5,
               ),
               Text(
-                "Comment",
+                "Extra Note (Optional)",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: size.height * 0.021,
@@ -111,10 +120,10 @@ class UserDetailsState extends State<UserDetails> {
                 height: 5,
               ),
               CustomTextField(
-                title: "Add Some Comments",
+                title: "Add Some Extra Notes",
                 controller: commentController,
                 lines: 5,
-                type: TextInputType.name,
+                type: TextInputType.text,
               ),
               SizedBox(
                 height: size.height * 0.02,
@@ -124,18 +133,19 @@ class UserDetailsState extends State<UserDetails> {
                   onTap: () {
                     if (fullNameController.text.isEmpty) {
                       snackBar(context, "Please! Enter Full Name");
-                    } else if (emailController.text.isEmpty) {
-                      snackBar(context, "Please! Enter Email");
-                    } else if (addressController.text.isEmpty) {
-                      snackBar(context, "Please! Enter Address");
-                    } else if (commentController.text.isEmpty) {
-                      snackBar(context, "Please! Enter Some Comment");
-                    } else {
+                    }
+                    //  else if (addressController.text.isEmpty) {
+                    //   snackBar(context, "Please! Enter Address");
+                    // }
+                    //  else if (commentController.text.isEmpty) {
+                    //   snackBar(context, "Please! Enter Some Comment");
+                    // } 
+                    else {
 
                       GlobalState.orderModel!.name = fullNameController.text;
                       GlobalState.orderModel!.phoneNumber = FirebaseAuth.instance.currentUser!.phoneNumber;
                       GlobalState.orderModel!.email = emailController.text;
-                      GlobalState.orderModel!.address = addressController.text;
+                      // GlobalState.orderModel!.address = addressController.text;
                       GlobalState.orderModel!.comment = commentController.text;
                       
                       Navigator.of(context).push(

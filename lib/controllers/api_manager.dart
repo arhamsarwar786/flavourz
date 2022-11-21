@@ -34,6 +34,23 @@ class APIManager {
       print(e);
     }
   }
+   static delete_order({@required number}) async {
+    print(number);
+    try {
+      var data = await http.post(
+          Uri.parse("https://www.geoinvest.pk/food/api/delete_order_api.php"),
+          body: {'phone_number': "$number"});
+      print(data.body);
+      if (data.body != '0') {
+        // var res = trackOrderModelFromJson(data.body);
+        return data.body;
+      }else{
+        return data.body;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   static placeOrder(OrderModel order) async {
     try {

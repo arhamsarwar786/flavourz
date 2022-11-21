@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavourz/View/Root.dart';
+import 'package:flavourz/View/authentication/opt_screen.dart';
 import 'package:flavourz/controllers/api_manager.dart';
 import 'package:flavourz/controllers/globalState.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:intl/intl.dart';
 import '../Utils/constant.dart';
 import '../models/track_order_model.dart';
 import '../widgets.dart';
+import 'authentication/register_screen.dart';
 import 'track_your_order.dart';
 
 class OrderHistory extends StatefulWidget {
@@ -30,11 +32,13 @@ class _OrderHistoryState extends State<OrderHistory> {
             data = res;
           }
       setState(() {});
-    } else {
-      var number = addNumberDialog(context);
+    } 
+    else {
+      Navigator.push(context, MaterialPageRoute(builder: (_)=> RegisterScreen()) );
+      // var number = addNumberDialog(context);
 
-      data = await APIManager.trackOrder(number: number);
-      setState(() {});
+      // data = await APIManager.trackOrder(number: number);
+      // setState(() {});
     }
   }
 

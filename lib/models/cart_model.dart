@@ -13,6 +13,7 @@ class CartModel {
         this.id,
         this.productType,
         this.name,
+        this.product_category,
         this.productDescription,
         this.image,
         this.price,
@@ -21,6 +22,7 @@ class CartModel {
 
     String? id;
     String? productType;
+    String? product_category;
     String? name;
     String? productDescription;
     String? image;
@@ -29,6 +31,7 @@ class CartModel {
 
     factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
         id: json["id"],
+        product_category: json["product_category"],
         productType: json["productType"],
         name: json["name"],
         productDescription: json["productDescription"],
@@ -41,6 +44,7 @@ class CartModel {
         "id": id,
         "productType": productType,
         "name": name,
+        "name": product_category,
         "productDescription": productDescription,
         "image": image,
         "price": price,

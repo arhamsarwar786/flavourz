@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavourz/View/details_item.dart';
 import 'package:flavourz/View/set_prefrences.dart';
 import 'package:flavourz/controllers/globalState.dart';
@@ -11,6 +12,7 @@ import '/Utils/constant.dart';
 
 import 'Home/BottomNavigationBar.dart';
 import 'Menu/widgets.dart';
+import 'authentication/register_screen.dart';
 import 'user_details.dart';
 
 class AddToCart extends StatefulWidget {
@@ -410,7 +412,7 @@ totalAmount = total;
 
                         
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SetPreference()));
+                            builder: (context) => FirebaseAuth.instance.currentUser == null ? RegisterScreen() : SetPreference()));
                       },
                       child: Card(
                         elevation: 10,

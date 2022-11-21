@@ -33,6 +33,7 @@ class Cafe {
         this.id,
         this.productType,
         this.productName,
+        this.product_category,
         this.productDescription,
         this.productPrice,
         this.productImageBase64,
@@ -41,6 +42,7 @@ class Cafe {
     String? id;
     String? productType;
     String? productName;
+    String? product_category;
     String? productDescription;
     String? productPrice;
     String? productImageBase64;
@@ -49,6 +51,7 @@ class Cafe {
         id: json["id"],
         productType: json["product_type"],
         productName: json["product_name"],
+        product_category: json["product_category"],
         productDescription: json["product_description"],
         productPrice: json["product_price"],
         productImageBase64: json["product_image_base64"],
@@ -58,6 +61,7 @@ class Cafe {
         "id": id,
         "product_type": productType,
         "product_name": productName,
+        "product_category": product_category,
         "product_description": productDescription,
         "product_price": productPrice,
         "product_image_base64": productImageBase64,
@@ -71,6 +75,7 @@ class Restaurant {
         this.id,
         this.productType,
         this.productName,
+        this.product_category,
         this.productDescription,
         this.productPrice,
         this.productImageBase64,
@@ -79,6 +84,7 @@ class Restaurant {
     String? id;
     String? productType;
     String? productName;
+    String? product_category;
     String? productDescription;
     String? productPrice;
     String? productImageBase64;
@@ -87,6 +93,7 @@ class Restaurant {
         id: json["id"],
         productType: json["product_type"],
         productName: json["product_name"],
+        product_category: json["product_category"],
         productDescription: json["product_description"],
         productPrice: json["product_price"],
         productImageBase64: json["product_image_base64"],
@@ -96,6 +103,7 @@ class Restaurant {
         "id": id,
         "product_type": productType,
         "product_name": productName,
+        "product_category": product_category,
         "product_description": productDescription,
         "product_price": productPrice,
         "product_image_base64": productImageBase64,

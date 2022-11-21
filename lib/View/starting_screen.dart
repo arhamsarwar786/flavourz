@@ -88,7 +88,7 @@ class _StartScreenState extends State<StartScreen>
               child: InkWell(
                 onTap: () {
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (_) => FirebaseAuth.instance.currentUser != null ? Home() : RegisterScreen()));
+                      MaterialPageRoute(builder: (_) => Home() ));
                 },
                 child: Card(
                   elevation: 3,

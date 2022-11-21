@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavourz/View/Root.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -271,7 +272,8 @@ showAlertDialog(BuildContext context) {
       FirebaseAuth.instance.signOut();
       GlobalState.orderModel = null;
       GlobalState.cartModel = null;
-      Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context)=> RegisterScreen()  ), (route) => false);
+      screenIndex = 0 ;
+      Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context)=> Home()  ), (route) => false);
     },
   );
 

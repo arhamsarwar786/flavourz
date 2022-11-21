@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavourz/View/authentication/register_screen.dart';
 import 'package:flavourz/View/set_prefrences.dart';
 import 'package:flavourz/controllers/preferences.dart';
 import 'package:flavourz/widgets.dart';
@@ -154,6 +156,26 @@ class _DetailsItemState extends State<DetailsItem> {
                             height: size.height * 0.02,
                           ),
                           Text(
+                            "Category ",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                                fontSize: size.height * 0.019),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              "${widget.item['product_category'] ?? widget.item['product_category']}",
+                              style: TextStyle(
+                                  fontSize: size.height * 0.018,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black54),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
                             "Description ",
                             style: TextStyle(
                                 color: Colors.black,
@@ -279,6 +301,8 @@ class _DetailsItemState extends State<DetailsItem> {
                                       id: widget.item['id'],
                                       productType:
                                           widget.item['product_type'] ?? widget.item['productType'],
+                                          product_category:
+                                          widget.item['product_category'] ?? widget.item['product_category'],
                                       name: widget.item['product_name'] ?? widget.item['name'],
                                       productDescription: widget.item['product_description'] ?? widget.item['productDescription'],
                                       image:
@@ -288,8 +312,9 @@ class _DetailsItemState extends State<DetailsItem> {
                                     
                                   ));
                                   snackBar(context, "Item Added");
+                                  
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => SetPreference()));
+                                      builder: (context) => FirebaseAuth.instance.currentUser == null ? RegisterScreen() : SetPreference()));
                                 },
                                 child: Card(
                                   elevation: 5,
@@ -326,6 +351,8 @@ class _DetailsItemState extends State<DetailsItem> {
                                               widget.item['productType'],
                                       "name": widget.item['product_name'] ??
                                           widget.item['name'],
+                                               "product_category":
+                                          widget.item['product_category'] ?? widget.item['product_category'],
                                       "productDescription":
                                           widget.item['product_description'] ??
                                               widget.item['productDescription'],
@@ -339,9 +366,10 @@ class _DetailsItemState extends State<DetailsItem> {
                                     };
                                     print(widget.item);
                                     ControllerCart.addCart(context, cart);
+                                    screenIndex = 2;
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
-                                            builder: (context) => AddToCart()));
+                                            builder: (context) => Home()));
                                   },
                                   child: Card(
                                       elevation: 5,

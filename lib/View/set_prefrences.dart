@@ -1,4 +1,5 @@
 import 'package:flavourz/controllers/globalState.dart';
+import 'package:flavourz/controllers/location_permission.dart';
 import 'package:flutter/material.dart';
 
 import '../Utils/constant.dart';
@@ -87,29 +88,79 @@ class _SetPreferenceState extends State<SetPreference> {
     );
   }
 
+
 Widget _delivery(context) {
   final size = MediaQuery.of(context).size;
-  return Container(
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Text(
-          //   "SET YOUR LOCATION",
-          //   style: TextStyle(
-          //       color: Colors.black,
-          //       fontSize: size.height * 0.020,
-          //       fontWeight: FontWeight.w600),
-          // ),
+      
           SizedBox(
             height: size.height * 0.012,
           ),
-          // CustomTextField(
-          //   title: "Set Location",
-          //   controller: deliveryLocationController,
-          // ),
+       Container(
+      color: Colors.white,
+      child: TextField(
+        onChanged: (e){
+           setState(() {
+           GlobalState.location = e; 
+             
+           });
+        },
+        controller: deliveryLocationController,
+        keyboardType: TextInputType.text,
+        cursorColor: primary,
+        // maxLines: lines,
+        autofocus: false,
+        style:TextStyle(fontSize:12),
+        decoration: InputDecoration(        
+          contentPadding: const EdgeInsets.only(left: 10, right: 10,top: 20),
+          fillColor: Colors.white,
+          // filled: true,
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: primary, width: 3),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: primary, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: primary, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: primary, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          hintText: " Enter Location",
+          hintStyle: TextStyle(color: Colors.black38, fontSize: 12),
+        ),
+      ),
+    ),
+  
+          const SizedBox(
+            height: 10,
+          ),
+          const Divider(
+            color: primary,
+            thickness: 0.5,
+          ),
+    
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('OR',style: TextStyle(fontSize: 30),),
+            ],
+          ),
           const Divider(
             color: primary,
             thickness: 0.5,
@@ -117,39 +168,60 @@ Widget _delivery(context) {
           const SizedBox(
             height: 10,
           ),
-          Row(
-            children: const [
-              // Icon(
-              //   Icons.location_searching,
-              //   size: 25,
-              //   color: Colors.black,
-              // ),
-              SizedBox(
-                width: 10,
-              ),
-              // Text(
-              //   "Use Current Location",
-              //   style: TextStyle(
-              //       color: Colors.black,
-              //       fontSize: 17,
-              //       fontWeight: FontWeight.w500),
-              // ),
-            ],
+          InkWell(
+            onTap: ()async{
+              await getCurrentLocation();
+              setState(() {                
+              });
+            },
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.gps_fixed,
+                  size: 25,
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Use Current Location",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
           ),
+SizedBox(
+            height: 10,
+          ),
+              Text('Address',style: TextStyle(fontSize: 20),),
+
+
+           if(GlobalState.location!=null)
+          Text('${GlobalState.location}'),
           SizedBox(
-            height: size.height * 0.15,
+            height: 10,
           ),
           Center(
             child: InkWell(
               onTap: () {
+                if(GlobalState.location == null){
+                  snackBar(context, "Please! Select Location Option");
+                }else{
+
                 if(setPreference == "takeway"){
                   GlobalState.orderModel!.setPreference = "takeway";
                 }else{
                   GlobalState.orderModel!.setPreference = "delivery";
-
+    
                 }
+                GlobalState.orderModel!.address = '${GlobalState.location}';
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => UserDetails()));
+                }
               },
               child: Card(
                 elevation: 3,
@@ -166,7 +238,7 @@ Widget _delivery(context) {
                         primary,
                       ]),
                     ),
-                    child: const Text("Order Now",
+                    child: const Text("Next",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
@@ -174,6 +246,8 @@ Widget _delivery(context) {
               ),
             ),
           ),
+
+         
         ],
       ),
     ),
@@ -182,27 +256,85 @@ Widget _delivery(context) {
 
 Widget _takeway(context) {
   final size = MediaQuery.of(context).size;
-  return Container(
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Text(
-          //   "SET YOUR LOCATION",
-          //   style: TextStyle(
-          //       color: Colors.black,
-          //       fontSize: size.height * 0.020,
-          //       fontWeight: FontWeight.w600),
-          // ),
+      
           SizedBox(
             height: size.height * 0.012,
           ),
-          // CustomTextField(
-          //   title: "Set Location",
-          //   controller: takewayLocationController,
-          // ),
+       Container(
+      color: Colors.white,
+      child: TextField(
+
+        controller: deliveryLocationController,
+        keyboardType: TextInputType.text,
+        cursorColor: primary,
+        // maxLines: lines,
+        autofocus: false,
+        style:TextStyle(fontSize:12),
+        decoration: InputDecoration(
+          suffixIcon: IconButton(onPressed: (){
+
+
+            if(deliveryLocationController.text.isEmpty){
+              snackBar(context, 'Please Enter some location');
+            }else{
+              GlobalState.location = deliveryLocationController.text; 
+            }
+
+            setState(() {
+              
+            });
+
+          }, icon:  Icon(Icons.add,color: primary,)),
+          contentPadding: const EdgeInsets.only(left: 10, right: 10,top: 20),
+          fillColor: Colors.white,
+          // filled: true,
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: primary, width: 3),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: primary, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: primary, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: primary, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          hintText: " Enter Location",
+          hintStyle: TextStyle(color: Colors.black38, fontSize: 12),
+        ),
+      ),
+    ),
+  
+          const SizedBox(
+            height: 10,
+          ),
+          const Divider(
+            color: primary,
+            thickness: 0.5,
+          ),
+    
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('OR',style: TextStyle(fontSize: 30),),
+            ],
+          ),
           const Divider(
             color: primary,
             thickness: 0.5,
@@ -210,39 +342,60 @@ Widget _takeway(context) {
           const SizedBox(
             height: 10,
           ),
-          Row(
-            children: const [
-              // Icon(
-              //   Icons.location_searching,
-              //   size: 25,
-              //   color: Colors.black,
-              // ),
-              SizedBox(
-                width: 10,
-              ),
-              // Text(
-              //   "Use Current Location",
-              //   style: TextStyle(
-              //       color: Colors.black,
-              //       fontSize: 17,
-              //       fontWeight: FontWeight.w500),
-              // ),
-            ],
+          InkWell(
+            onTap: ()async{
+              await getCurrentLocation();
+              setState(() {                
+              });
+            },
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.gps_fixed,
+                  size: 25,
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Use Current Location",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
           ),
+SizedBox(
+            height: 10,
+          ),
+              Text('Address',style: TextStyle(fontSize: 20),),
+
+
+           if(GlobalState.location!=null)
+          Text('${GlobalState.location}'),
           SizedBox(
-            height: size.height * 0.15,
+            height: 10,
           ),
           Center(
             child: InkWell(
               onTap: () {
+                if(GlobalState.location == null){
+                  snackBar(context, "Please! Select Location Option");
+                }else{
+
                 if(setPreference == "takeway"){
                   GlobalState.orderModel!.setPreference = "takeway";
                 }else{
                   GlobalState.orderModel!.setPreference = "delivery";
-
+    
                 }
+                GlobalState.orderModel!.address = '${GlobalState.location}';
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => UserDetails()));
+                }
               },
               child: Card(
                 elevation: 3,
@@ -259,7 +412,7 @@ Widget _takeway(context) {
                         primary,
                       ]),
                     ),
-                    child: const Text("Order Now",
+                    child: const Text("Next",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
@@ -267,6 +420,8 @@ Widget _takeway(context) {
               ),
             ),
           ),
+
+         
         ],
       ),
     ),

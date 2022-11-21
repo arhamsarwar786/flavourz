@@ -291,7 +291,7 @@ class _Home1State extends State<Home1> {
                                                           "price": item.productPrice,
                                                           "quantity": 1,                                                
                                                         };
-                         
+                                                                
                                                         ControllerCart.addCart(context, cart);
                                                       },
                                                       icon: Icon(
