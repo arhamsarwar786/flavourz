@@ -44,7 +44,7 @@ class CartModel {
         "id": id,
         "productType": productType,
         "name": name,
-        "name": product_category,
+        "product_category": product_category,
         "productDescription": productDescription,
         "image": image,
         "price": price,

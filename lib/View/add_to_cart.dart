@@ -138,7 +138,8 @@ totalAmount = total;
                                                 ),
                                                 fit: BoxFit.cover,
                                               ),
-                                            )),
+                                            ),
+                                            ),
                                       ),
                                       Container(
                                         height: 120,
@@ -155,10 +156,10 @@ totalAmount = total;
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
-                                                children: [
+                                                children: [                                                  
                                                   FittedBox(
                                                     child: Text(
-                                                      cart![index].name!,
+                                                      '${cart![index].name}',
                                                       maxLines: 2,
                                                       textDirection:
                                                           TextDirection.ltr,

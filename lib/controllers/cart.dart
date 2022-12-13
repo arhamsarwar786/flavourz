@@ -9,8 +9,9 @@ import '../widgets.dart';
 // var values=0;
 class Cart {
   static insertToCart(context, cart) async {
+    print("${cart} finding ===================");
     var modelCart = CartModel.fromJson(cart);
-    
+    print("${modelCart.toJson()} finding -----------------");
     var cartt = await SavedPreferences.getCart();
     if (cartt != null) {
       List<CartModel> cartList = cartModelFromJson(jsonEncode(cartt));

@@ -58,33 +58,33 @@ class UserDetailsState extends State<UserDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+         GlobalState.orderModel!.setPreference == 'takeway' ? Container() :     Text(
                 "Full Name",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: size.height * 0.021,
                     fontWeight: FontWeight.w700),
               ),
-              SizedBox(
+            GlobalState.orderModel!.setPreference == 'takeway' ? Container() :  SizedBox(
                 height: 5,
               ),
-              CustomTextField(
+           GlobalState.orderModel!.setPreference == 'takeway' ? Container() :   CustomTextField(
                 title: "Enter Full Name",
                 controller: fullNameController,
               ),
             
 
-              SizedBox(
+            GlobalState.orderModel!.setPreference == 'takeway' ? Container() :  SizedBox(
                 height: 5,
               ),
-                Text(
+            GlobalState.orderModel!.setPreference == 'takeway' ? Container() :    Text(
                 "Phone Number (Optional)",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: size.height * 0.021,
                     fontWeight: FontWeight.w700),
               ),
-                CustomTextField(
+            GlobalState.orderModel!.setPreference == 'takeway' ? Container() :    CustomTextField(
                 title: "Enter Phone Number ",
                 controller: emailController,
                 type: TextInputType.number,
@@ -92,17 +92,17 @@ class UserDetailsState extends State<UserDetails> {
               // SizedBox(
               //   height: 5,
               // ),
-              Text(
+           GlobalState.orderModel!.setPreference == 'takeway' ? Container() :   Text(
                 "Address",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: size.height * 0.021,
                     fontWeight: FontWeight.w700),
               ),
-              SizedBox(
+          GlobalState.orderModel!.setPreference == 'takeway' ? Container() :    SizedBox(
                 height: 5,
               ),
-              CustomTextField(
+          GlobalState.orderModel!.setPreference == 'takeway' ? Container() :    CustomTextField(
                 title: "Enter Address",
                 controller: addressController,
               ),
@@ -131,6 +131,9 @@ class UserDetailsState extends State<UserDetails> {
               Center(
                 child: InkWell(
                   onTap: () {
+                    if(GlobalState.orderModel!.setPreference == "takeway"){
+                        fullNameController.text = " ";
+                    }
                     if (fullNameController.text.isEmpty) {
                       snackBar(context, "Please! Enter Full Name");
                     }

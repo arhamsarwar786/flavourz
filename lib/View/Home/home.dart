@@ -290,8 +290,8 @@ class _Home1State extends State<Home1> {
                                                           "image": item.productImageBase64,
                                                           "price": item.productPrice,
                                                           "quantity": 1,                                                
-                                                        };
-                                                                
+                                                        };                                                                
+                                                        print(cart);
                                                         ControllerCart.addCart(context, cart);
                                                       },
                                                       icon: Icon(
