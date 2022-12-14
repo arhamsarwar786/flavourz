@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'Utils/constant.dart';
 import 'View/authentication/register_screen.dart';
 import 'controllers/globalState.dart';
+import 'models/menu_model.dart';
 
 Widget CustomAppBar(context, title, int color) {
   final size = MediaQuery.of(context).size;
@@ -130,9 +131,9 @@ class CustomTextField extends StatelessWidget {
         cursorColor: primary,
         maxLines: lines,
         autofocus: false,
-        style:TextStyle(fontSize:12),
+        style: TextStyle(fontSize: 12),
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(left: 10, right: 10,top: 20),
+          contentPadding: const EdgeInsets.only(left: 10, right: 10, top: 20),
           fillColor: Colors.white,
           // filled: true,
           errorBorder: OutlineInputBorder(
@@ -163,11 +164,8 @@ class CustomTextField extends StatelessWidget {
   }
 }
 
-
-
-
-
-showAlert(BuildContext context, {@required title,@required content,@required type}) {
+showAlert(BuildContext context,
+    {@required title, @required content, @required type}) {
   Widget continueButton = MaterialButton(
     color: type == "error" ? Colors.red : Colors.green,
     child: Text(
@@ -175,7 +173,7 @@ showAlert(BuildContext context, {@required title,@required content,@required typ
       style: TextStyle(color: Colors.white),
     ),
     onPressed: () {
-      if(type == "success"){
+      if (type == "success") {
         // GlobalState.isDataPosted = false;
       }
       Navigator.pop(context);
@@ -221,13 +219,9 @@ addNumberDialog(BuildContext context) {
         snackBar(context, "Enter Valid Number");
       } else {
         Navigator.pop(context);
-
-        
       }
     },
   );
-
-
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
@@ -256,7 +250,6 @@ addNumberDialog(BuildContext context) {
   return numberController.text;
 }
 
-
 //  FUNCTION FOR ALERTBOX
 showAlertDialog(BuildContext context) {
   // Create button
@@ -272,8 +265,9 @@ showAlertDialog(BuildContext context) {
       FirebaseAuth.instance.signOut();
       GlobalState.orderModel = null;
       GlobalState.cartModel = null;
-      screenIndex = 0 ;
-      Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context)=> Home()  ), (route) => false);
+      screenIndex = 0;
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) => Home()), (route) => false);
     },
   );
 
@@ -291,13 +285,13 @@ showAlertDialog(BuildContext context) {
   AlertDialog alert = AlertDialog(
     title: Text(
       "Alert",
-      style: TextStyle(
-          color: primary, fontSize: 18, fontWeight: FontWeight.w800),
+      style:
+          TextStyle(color: primary, fontSize: 18, fontWeight: FontWeight.w800),
     ),
     content: Text(
       "Are You Sure Want to Log Out?",
-      style: TextStyle(
-          color: primary, fontSize: 15, fontWeight: FontWeight.w600),
+      style:
+          TextStyle(color: primary, fontSize: 15, fontWeight: FontWeight.w600),
     ),
     actions: [
       okButton,
@@ -312,4 +306,47 @@ showAlertDialog(BuildContext context) {
       return alert;
     },
   );
+}
+
+class CustomSearchBar extends StatefulWidget {
+  final controller, enabled,allItems, searchItems;
+  CustomSearchBar({this.controller, this.enabled = true,this.allItems,this.searchItems});
+
+  @override
+  State<CustomSearchBar> createState() => _CustomSearchBarState();
+}
+
+class _CustomSearchBarState extends State<CustomSearchBar> {
+
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // height: 45,
+      child: new Card(
+        child: new ListTile(
+          leading: new Icon(Icons.search),
+          title: new TextField(
+            enabled: widget.enabled,
+            controller: widget.controller,
+            decoration: new InputDecoration(
+
+                hintText: 'Search',
+                border: InputBorder.none),
+            // onChanged: onSearchTextChanged,
+          ),
+          trailing: new IconButton(
+            icon: new Icon(Icons.cancel),
+            onPressed: () {
+              widget.controller.clear();
+              // onSearchTextChanged('');
+            },
+          ),
+        ),
+      ),
+    );
+  }
 }
