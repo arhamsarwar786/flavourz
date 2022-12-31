@@ -1,5 +1,6 @@
 import 'package:flavourz/models/menu_model.dart';
 import 'package:flavourz/models/order_model.dart';
+import 'package:flavourz/models/slider_model.dart';
 import 'package:flavourz/models/track_order_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +12,18 @@ class APIManager {
           .get(Uri.parse("https://www.geoinvest.pk/food/api/products_api.php"));
       print(data);
       var res = menuModelFromJson(data.body);
+      return res;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+    static fetchSliderData() async {
+    try {
+      var data = await http
+          .get(Uri.parse("https://www.geoinvest.pk/food/api/slider_api.php"));
+      print(data);
+      var res = sliderModelFromJson(data.body);
       return res;
     } catch (e) {
       print(e);

@@ -37,6 +37,7 @@ class Cafe {
         this.productDescription,
         this.productPrice,
         this.productImageBase64,
+        this.sale,
     });
 
     String? id;
@@ -46,6 +47,7 @@ class Cafe {
     String? productDescription;
     String? productPrice;
     String? productImageBase64;
+    String? sale;
 
     factory Cafe.fromJson(Map<String, dynamic> json) => Cafe(
         id: json["id"],
@@ -55,6 +57,7 @@ class Cafe {
         productDescription: json["product_description"],
         productPrice: json["product_price"],
         productImageBase64: json["product_image_base64"],
+        sale: json["sale"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -65,6 +68,7 @@ class Cafe {
         "product_description": productDescription,
         "product_price": productPrice,
         "product_image_base64": productImageBase64,
+        "sale": sale,
     };
 }
 
@@ -79,6 +83,7 @@ class Restaurant {
         this.productDescription,
         this.productPrice,
         this.productImageBase64,
+        this.sale,
     });
 
     String? id;
@@ -88,6 +93,7 @@ class Restaurant {
     String? productDescription;
     String? productPrice;
     String? productImageBase64;
+    String? sale;
 
     factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
         id: json["id"],
@@ -97,6 +103,7 @@ class Restaurant {
         productDescription: json["product_description"],
         productPrice: json["product_price"],
         productImageBase64: json["product_image_base64"],
+        sale: json["sale"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -107,5 +114,6 @@ class Restaurant {
         "product_description": productDescription,
         "product_price": productPrice,
         "product_image_base64": productImageBase64,
+        "sale": sale,
     };
 }

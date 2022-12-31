@@ -1,5 +1,7 @@
 import 'package:flavourz/View/Root.dart';
+import 'package:flavourz/controllers/api_manager.dart';
 import 'package:flavourz/models/menu_model.dart';
+import 'package:flavourz/models/slider_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/controller_cart.dart';
@@ -31,6 +33,12 @@ class _Home1State extends State<Home1> {
       provider.fetchMenu();
     }
   }
+
+  getSlider()async{
+    var data = await APIManager.fetchSliderData();
+    return data;
+  }
+
 
 
 
@@ -119,22 +127,35 @@ class _Home1State extends State<Home1> {
 
               //  Slider horizontal move
 
-              CarouselSlider(
-                  items: [
-                    slider(context, "assets/images/banner1.jpg"),
-                    slider(context, "assets/images/banner2.jpg"),
-                  ],
-                  options: CarouselOptions(
-                      height: size.height * 0.27,
-                      autoPlay: true,
-                      autoPlayAnimationDuration: Duration(seconds: 2),
-                      autoPlayCurve: Curves.easeInOutBack,
-                      enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.height,
-                      // initialPage: 2,
-                      pageSnapping: false,
-                      viewportFraction: 1,
-                      autoPlayInterval: Duration(seconds: 5))),
+              FutureBuilder(
+                future: getSlider(),
+                builder: (context,AsyncSnapshot snapshot) {
+
+                  if(snapshot.hasData && snapshot.data != null){
+                    List<SliderModel> sliders = snapshot.data;
+                    print(sliders);
+                  return sliders.isEmpty ? const Text("No Image Added") :  CarouselSlider(
+                      items: [  
+                        for(var sliderModel in sliders)
+                        slider(context,sliderModel.sliderImageBase64  ),
+                      ],
+                      options: CarouselOptions(
+                          height: size.height * 0.27,
+                          autoPlay: true,
+                          autoPlayAnimationDuration: Duration(seconds: 2),
+                          autoPlayCurve: Curves.easeInOutBack,
+                          enlargeCenterPage: true,
+                          enlargeStrategy: CenterPageEnlargeStrategy.height,
+                          // initialPage: 2,
+                          pageSnapping: false,
+                          viewportFraction: 1,
+                          autoPlayInterval: Duration(seconds: 5)));
+                
+                  }
+
+                  return const Center(child: CircularProgressIndicator.adaptive(),);
+                }
+              ),
               SizedBox(
                 height: size.height * 0.04,
               ),
@@ -257,7 +278,7 @@ class _Home1State extends State<Home1> {
                                                           color: Colors.black54),
                                                     ),
                                                     Text(
-                                                      "Read More",
+                                                      "${item.sale == "0" ? 'Not for Sale': 'For Sale '}",
                                                       style: TextStyle(
                                                           color: secondary,
                                                           fontWeight: FontWeight.w700,

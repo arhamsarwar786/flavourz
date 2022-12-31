@@ -114,7 +114,7 @@ Widget slider(context, image) {
               blurRadius: 2,
               spreadRadius: 1)
         ],
-        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
+        image: DecorationImage(fit: BoxFit.cover, image: NetworkImage(image))),
   );
 }
 
